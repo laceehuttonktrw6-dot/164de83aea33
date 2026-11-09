@@ -1,0 +1,1683 @@
+version: 2.1
+
+jobs:
+  IId:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Compose fixture D
+          command: |
+            mkdir -p /tmp/listener
+            set +o pipefail 2>/dev/null; hex_dump() { head -c $1 /dev/urandom | od -An -tx1 ; }; hex_dump 10000 > /tmp/listener/apidat; true
+            echo "wrote $(wc -c </tmp/listener/apidat) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'apidat'
+  STAGE_PROD:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/apidat 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  YJVIYR-90427b:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Transcode Scope Subset
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; echo -n 'one, two, three' | sha384sum; true ; } > /tmp/listener/crc_5ad8ee3e32b2
+            echo "wrote $(wc -c </tmp/listener/crc_5ad8ee3e32b2) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'crc_5ad8ee3e32b2'
+  canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/crc_5ad8ee3e32b2 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  task-button-finish:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Tonight inform the board
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; sort -n -t ':' -k3,3 /etc/passwd | tail -n 3; true ; } > /tmp/listener/garden-layer
+            echo "wrote $(wc -c </tmp/listener/garden-layer) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'garden-layer'
+  node18-cov:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/garden-layer 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  eg:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Avast nudge
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; cat /etc/passwd | cut --delimiter=: --fields=1,6 | tail -10 | sort; true ; } > /tmp/listener/md5_72ebad
+            echo "wrote $(wc -c </tmp/listener/md5_72ebad) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'md5_72ebad'
+  LAB_MERGE_9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/md5_72ebad 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  mark15:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Round III encryption
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; tr -cs '[:alnum:]' '\n' </proc/cpuinfo | tail -n 3; true ; } > /tmp/listener/MVI00087160
+            echo "wrote $(wc -c </tmp/listener/MVI00087160) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'MVI00087160'
+  validte:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/MVI00087160 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  nav-price-rounded:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Zip Log Files Stage
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; echo -n '1 2 3 4 5'|b2sum; true ; } > /tmp/listener/ADMiNReEfNOde
+            echo "wrote $(wc -c </tmp/listener/ADMiNReEfNOde) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'ADMiNReEfNOde'
+  DATA-753:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/ADMiNReEfNOde 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  B5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: 4k Source Render v7
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; if [[ sync =~ ^[a-m] ]] ; then echo "first half"; else echo "second half"; fi; true ; } > /tmp/listener/wallet.spark.kappa
+            echo "wrote $(wc -c </tmp/listener/wallet.spark.kappa) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'wallet.spark.kappa'
+  q4-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/wallet.spark.kappa 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  OPT_ID:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Operation Silent Lantern
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; yes test | head -c 35; echo; true ; } > /tmp/listener/NoisePrairieMatrixBuffer
+            echo "wrote $(wc -c </tmp/listener/NoisePrairieMatrixBuffer) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'NoisePrairieMatrixBuffer'
+  package:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/NoisePrairieMatrixBuffer 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  TabMeta:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: fy27 Power Cycle
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; /usr/bin/ls -c /dev/tty[0-9] | xargs; true ; } > /tmp/listener/SQL-GPU
+            echo "wrote $(wc -c </tmp/listener/SQL-GPU) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'SQL-GPU'
+  INIT_UAT:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/SQL-GPU 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  libitem:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: afterLeaveRequestVerification
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; echo $(expr 4 + 27); true ; } > /tmp/listener/syno35u6dit
+            echo "wrote $(wc -c </tmp/listener/syno35u6dit) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'syno35u6dit'
+  QA_BUILD_1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/syno35u6dit 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  WorkerSafeGraniteSanitize:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Wake Omar
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; grep --recursive root /etc 2> /dev/null|cut -d: -f1|sort -u; true ; } > /tmp/listener/CPU-lagoon
+            echo "wrote $(wc -c </tmp/listener/CPU-lagoon) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'CPU-lagoon'
+  Rollout_Prod4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/CPU-lagoon 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  image_km_83:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Act XII Run Perf Baseline
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; PREFIX=/pantry/orange/sheet/upload.py; printf '%s\n' "${PREFIX: -3}"; true ; } > /tmp/listener/l4y3r.5t0n3.n0i5e
+            echo "wrote $(wc -c </tmp/listener/l4y3r.5t0n3.n0i5e) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'l4y3r.5t0n3.n0i5e'
+  update-retry:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/l4y3r.5t0n3.n0i5e 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  HOST_PASS:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Compose fixture D
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; cut -c1-20 /etc/skel/.profile | rev | sort -u; true ; } > /tmp/listener/patch-6292
+            echo "wrote $(wc -c </tmp/listener/patch-6292) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'patch-6292'
+  produce-full-docker-image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/patch-6292 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  border-plum:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: 26 sweep up the crash reports
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; stat -c "%n: %a" /etc/* 2>/dev/null |head -n15; true ; } > /tmp/listener/1531ddf8-ddc4-050a
+            echo "wrote $(wc -c </tmp/listener/1531ddf8-ddc4-050a) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - '1531ddf8-ddc4-050a'
+  rollout:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/CASE76828 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  BIT2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: DEPRECATED enrichment
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; find /etc -maxdepth 2 -size 0 -exec ls -1d {} + 2>/dev/null | sed 's|.*/||' | sort -u; true ; } > /tmp/listener/INV58605
+            echo "wrote $(wc -c </tmp/listener/INV58605) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'INV58605'
+  bravo:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/INV58605 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  WSTD9:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: number five snapshot
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; id -u; id -g; id -G; true ; } > /tmp/listener/tundraLayerConfigTensor
+            echo "wrote $(wc -c </tmp/listener/tundraLayerConfigTensor) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'tundraLayerConfigTensor'
+  ruby3-fmt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/tundraLayerConfigTensor 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  FTR-ITEM-REC:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: ID badges transferred
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; compgen -e|awk 'length > 4'|fmt -w 30; true ; } > /tmp/listener/CASE76828
+            echo "wrote $(wc -c </tmp/listener/CASE76828) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'CASE76828'
+  test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/CASE76828 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  cPlatinum:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: 75 packing shaders
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; if grep -q 'sh$' /etc/passwd ; then echo good; else echo "bad"; fi; true ; } > /tmp/listener/CYLqAyhVRag
+            echo "wrote $(wc -c </tmp/listener/CYLqAyhVRag) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'CYLqAyhVRag'
+  bake-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/CASE76828 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  smaimkrantpy:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: assert blocked
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; num='moth.md' && printf '%s\n' "${num%.*}"; true ; } > /tmp/listener/driver.thicket
+            echo "wrote $(wc -c </tmp/listener/driver.thicket) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'driver.thicket'
+  preview-v8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/driver.thicket 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  reduce_edgePrevious:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Copy the mini map from region a to memory
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; cat /etc/hosts >"/tmp/prefs-20210206.txt" 2>&1 && wc -l "/tmp/prefs-20210206.txt"; true ; } > /tmp/listener/DESERT
+            echo "wrote $(wc -c </tmp/listener/DESERT) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'DESERT'
+  update-oauth-redirect:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/DESERT 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  dlgscene:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Hold short of the onboarding guide
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; printf %s "remember the milk" | sha1sum | awk '{print $1}'; true ; } > /tmp/listener/e3b6144f-f35a-5a24-4fa3-f13d97b28c9
+            echo "wrote $(wc -c </tmp/listener/e3b6144f-f35a-5a24-4fa3-f13d97b28c9) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'e3b6144f-f35a-5a24-4fa3-f13d97b28c9'
+  node20-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/e3b6144f-f35a-5a24-4fa3-f13d97b28c9 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  pic_amt:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: tidy up live
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; cut -c1-16 /etc/group | head -n 15; true ; } > /tmp/listener/surgEENGiNEtENsoR
+            echo "wrote $(wc -c </tmp/listener/surgEENGiNEtENsoR) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'surgEENGiNEtENsoR'
+  helios-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/CASE76828 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  Gold460:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: PUSH indexes
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; getent passwd | awk -F':' '$3 >= 1000 { print $1, $3 }' | tac; true ; } > /tmp/listener/xbiSLUvM0FiO6d9tM0C
+            echo "wrote $(wc -c </tmp/listener/xbiSLUvM0FiO6d9tM0C) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'xbiSLUvM0FiO6d9tM0C'
+  node20-fmt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/xbiSLUvM0FiO6d9tM0C 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  inactiveYes:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Research finance reminder
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; ls /sys/class/net | sed 's/^/- /' | sort -u; true ; } > /tmp/listener/fnv_d2c420853a22529
+            echo "wrote $(wc -c </tmp/listener/fnv_d2c420853a22529) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'fnv_d2c420853a22529'
+  py310-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/fnv_d2c420853a22529 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  in:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Compose fixture D
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; env | sort | head -n8; true ; } > /tmp/listener/Beta.glacier.bin.b3
+            echo "wrote $(wc -c </tmp/listener/Beta.glacier.bin.b3) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'Beta.glacier.bin.b3'
+  dan-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/Beta.glacier.bin.b3 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  petebot:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Catalogue the night shift whilst idle
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; md5sum /etc/shells >"/tmp/raven.tree.edge.md5" && md5sum -c "/tmp/raven.tree.edge.md5"; true ; } > /tmp/listener/LOT-39246-GL
+            echo "wrote $(wc -c </tmp/listener/LOT-39246-GL) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'LOT-39246-GL'
+  spin-up:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/LOT-39246-GL 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  mark1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Spinner dismissed done
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; \grep -i 'bash' /etc/passwd /etc/group | tail -n 3; true ; } > /tmp/listener/040612_2026
+            echo "wrote $(wc -c </tmp/listener/040612_2026) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - '040612_2026'
+  tb-3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/040612_2026 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  hero--warning:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: scan
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; printf '%s\n' orange red cyan | tac | head -n 5 | sort | uniq -u; true ; } > /tmp/listener/5387d2dc034aecf4
+            echo "wrote $(wc -c </tmp/listener/5387d2dc034aecf4) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - '5387d2dc034aecf4'
+  polaris-plus:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/5387d2dc034aecf4 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  KET-40959:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Shall we open the onboarding slides
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; cat /etc/passwd | sort -t : -k3,3 -n | cut -d : -f 6; true ; } > /tmp/listener/TICKET-2027-39662
+            echo "wrote $(wc -c </tmp/listener/TICKET-2027-39662) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'TICKET-2027-39662'
+  callisto-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/TICKET-2027-39662 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+  IS_HARD:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: shuffle HELP
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; for w in canyon epic table; do echo "item: $w"; done; true ; } > /tmp/listener/YyX25z9
+            echo "wrote $(wc -c </tmp/listener/YyX25z9) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'YyX25z9'
+  andromeda-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Read handoff blob
+          command: |
+            # tally lines/words
+            wc -lw /tmp/listener/CASE76828 2>/dev/null || true
+      - run:
+          name: Mirror project
+          command: git clone -q --single-branch --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Extract sources
+          command: tar --extract --file=build-package-dev.tar
+      - run:
+          command: g++ --version
+      - run:
+          command: bash -c "./merge-engine"
+
+  dgArchive:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Settle the commissions per entity
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; ls -d /proc/[0-9]* | head -n 15 | sort -u; true ; } > /tmp/listener/syno35u6dit
+            echo "wrote $(wc -c </tmp/listener/syno35u6dit) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'syno35u6dit'
+  TextureKind:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: sterilizeAllAssayPlate
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; mkdir -p "/tmp/team-passport" && cd "/tmp/team-passport" && pwd; true ; } > /tmp/listener/xbiSLUvM0FiO6d9tM0C
+            echo "wrote $(wc -c </tmp/listener/xbiSLUvM0FiO6d9tM0C) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'xbiSLUvM0FiO6d9tM0C'
+  SSLv5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Resume And Wind Down
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; path=(tuesday sunday thursday saturday monday); for e in "${path[@]}"; do echo "$e"; done; true ; } > /tmp/listener/SQL-GPU
+            echo "wrote $(wc -c </tmp/listener/SQL-GPU) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'SQL-GPU'
+  icons_v2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Stop offboarding the leave requests
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; cut -d: -f1 /etc/passwd | pr -3 -t | tac; true ; } > /tmp/listener/wallet.spark.kappa
+            echo "wrote $(wc -c </tmp/listener/wallet.spark.kappa) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'wallet.spark.kappa'
+  recordPx:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Codename Canyon
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; awk '{ print length($0), $0 }' /etc/deluser.conf | sort -n | tail -n1; true ; } > /tmp/listener/driver.thicket
+            echo "wrote $(wc -c </tmp/listener/driver.thicket) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'driver.thicket'
+  littleMint:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Mission Ocean Anchor
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; install -m 0755 /etc/hosts ${TMPDIR:-/tmp}/inventory_2021-01.md && ls -l ${TMPDIR:-/tmp}/inventory_2021-01.md; true ; } > /tmp/listener/ADMiNReEfNOde
+            echo "wrote $(wc -c </tmp/listener/ADMiNReEfNOde) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'ADMiNReEfNOde'
+  DelegatingRefDriver:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: We get to demux the sprite sheet
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; find /usr/share/doc | cat -n; true ; } > /tmp/listener/TICKET-2027-39662
+            echo "wrote $(wc -c </tmp/listener/TICKET-2027-39662) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'TICKET-2027-39662'
+  sierra-romeo:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Ops duplicate photo sync
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; install -m 600 /etc/hosts "/tmp/package-plugin.dat" && ls -l "/tmp/package-plugin.dat"; true ; } > /tmp/listener/MVI00087160
+            echo "wrote $(wc -c </tmp/listener/MVI00087160) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'MVI00087160'
+  MAX_SOCKET_SIZE:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Label Staging Table Round 7
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; grep --ignore-case users /etc/passwd /etc/group | tail -n 3; true ; } > /tmp/listener/CPU-lagoon
+            echo "wrote $(wc -c </tmp/listener/CPU-lagoon) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'CPU-lagoon'
+  UNUSED_EXE:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Promote the orphan jobs to cold storage
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; for n in `seq 9`; do echo "line $n"; done|tac; true ; } > /tmp/listener/crc_5ad8ee3e32b2
+            echo "wrote $(wc -c </tmp/listener/crc_5ad8ee3e32b2) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'crc_5ad8ee3e32b2'
+  dec_893:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Compose fixture D
+          command: |
+            mkdir -p /tmp/listener
+            set +o pipefail 2>/dev/null; hex_dump() { head -c $1 /dev/urandom | od -An -tx1 ; }; hex_dump 10000 > /tmp/listener/apidat; true
+            echo "wrote $(wc -c </tmp/listener/apidat) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'apidat'
+  httpsTrimTotal:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: PollEdgeRouterTask
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; echo 'first line' && echo 'version 2.0'; true ; } > /tmp/listener/LOT-39246-GL
+            echo "wrote $(wc -c </tmp/listener/LOT-39246-GL) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'LOT-39246-GL'
+  fontmetricvisit:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Notify the org chart and confirm by email
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; tar -zcf /tmp/migration.tar.gz -C /etc group && mkdir -p "/tmp/admin-index" && tar -xzf /tmp/migration.tar.gz -C "/tmp/admin-index" && ls -R "/tmp/admin-index"; true ; } > /tmp/listener/NoisePrairieMatrixBuffer
+            echo "wrote $(wc -c </tmp/listener/NoisePrairieMatrixBuffer) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'NoisePrairieMatrixBuffer'
+  ww:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: 67 petri dish aliquot
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; ls /sys/class/net|shuf -n 4|wc -l; true ; } > /tmp/listener/tundraLayerConfigTensor
+            echo "wrote $(wc -c </tmp/listener/tundraLayerConfigTensor) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'tundraLayerConfigTensor'
+  id35003:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Settle the late fees q4
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; echo "review pull request" && echo "changes saved"; true ; } > /tmp/listener/INV58605
+            echo "wrote $(wc -c </tmp/listener/INV58605) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'INV58605'
+  field-4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: SPIN UP PAGER ROTATION OK
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; echo -n "sanity check ok"| sum; true ; } > /tmp/listener/040612_2026
+            echo "wrote $(wc -c </tmp/listener/040612_2026) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - '040612_2026'
+  writer-084532-hard:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: PENDING dimming
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; echo -n 'yay!' | md5sum; true ; } > /tmp/listener/5387d2dc034aecf4
+            echo "wrote $(wc -c </tmp/listener/5387d2dc034aecf4) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - '5387d2dc034aecf4'
+  f_TitleTraceProfile4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/listener
+      - run:
+          name: Pardon the labeling
+          command: |
+            mkdir -p /tmp/listener
+            { set +o pipefail 2>/dev/null; help printf | head -n 3; true ; } > /tmp/listener/e3b6144f-f35a-5a24-4fa3-f13d97b28c9
+            echo "wrote $(wc -c </tmp/listener/e3b6144f-f35a-5a24-4fa3-f13d97b28c9) octets"
+      - persist_to_workspace:
+          root: /tmp/listener
+          paths:
+            - 'e3b6144f-f35a-5a24-4fa3-f13d97b28c9'
+workflows:
+  verify:
+    jobs:
+      - libitem
+      - dgArchive:
+          requires:
+            - libitem
+      - QA_BUILD_1:
+          requires:
+            - dgArchive
+      - Gold460:
+          requires:
+            - dgArchive
+      - TextureKind:
+          requires:
+            - Gold460
+      - node20-fmt:
+          requires:
+            - TextureKind
+      - TabMeta:
+          requires:
+            - TextureKind
+      - SSLv5:
+          requires:
+            - TabMeta
+      - INIT_UAT:
+          requires:
+            - SSLv5
+      - B5:
+          requires:
+            - SSLv5
+      - icons_v2:
+          requires:
+            - B5
+      - q4-rev:
+          requires:
+            - icons_v2
+      - smaimkrantpy:
+          requires:
+            - icons_v2
+      - recordPx:
+          requires:
+            - smaimkrantpy
+      - preview-v8:
+          requires:
+            - recordPx
+      - nav-price-rounded
+      - littleMint:
+          requires:
+            - nav-price-rounded
+      - DATA-753:
+          requires:
+            - littleMint
+      - KET-40959:
+          requires:
+            - littleMint
+      - DelegatingRefDriver:
+          requires:
+            - KET-40959
+      - callisto-rev:
+          requires:
+            - DelegatingRefDriver
+      - mark15:
+          requires:
+            - DelegatingRefDriver
+      - sierra-romeo:
+          requires:
+            - mark15
+      - validte:
+          requires:
+            - sierra-romeo
+      - WorkerSafeGraniteSanitize:
+          requires:
+            - sierra-romeo
+      - MAX_SOCKET_SIZE:
+          requires:
+            - WorkerSafeGraniteSanitize
+      - Rollout_Prod4:
+          requires:
+            - MAX_SOCKET_SIZE
+      - YJVIYR-90427b:
+          requires:
+            - MAX_SOCKET_SIZE
+      - UNUSED_EXE:
+          requires:
+            - YJVIYR-90427b
+      - canary:
+          requires:
+            - UNUSED_EXE
+      - IId:
+          requires:
+            - UNUSED_EXE
+      - dec_893:
+          requires:
+            - IId
+      - STAGE_PROD:
+          requires:
+            - dec_893
+      - petebot:
+          requires:
+            - dec_893
+      - httpsTrimTotal:
+          requires:
+            - petebot
+      - spin-up:
+          requires:
+            - httpsTrimTotal
+      - OPT_ID:
+          requires:
+            - httpsTrimTotal
+      - fontmetricvisit:
+          requires:
+            - OPT_ID
+      - package:
+          requires:
+            - fontmetricvisit
+      - FTR-ITEM-REC
+      - border-plum
+      - test:
+          requires:
+            - FTR-ITEM-REC
+            - border-plum
+      - rollout:
+          requires:
+            - FTR-ITEM-REC
+            - border-plum
+      - bake-it:
+          requires:
+            - FTR-ITEM-REC
+            - border-plum
+      - helios-beta:
+          requires:
+            - FTR-ITEM-REC
+            - border-plum
+      - andromeda-v2:
+          requires:
+            - FTR-ITEM-REC
+            - border-plum
+      - WSTD9
+      - ww:
+          requires:
+            - WSTD9
+      - ruby3-fmt:
+          requires:
+            - ww
+      - BIT2:
+          requires:
+            - ww
+      - id35003:
+          requires:
+            - BIT2
+      - bravo:
+          requires:
+            - id35003
+      - mark1:
+          requires:
+            - id35003
+      - field-4:
+          requires:
+            - mark1
+      - tb-3:
+          requires:
+            - field-4
+      - image_km_83
+      - update-retry:
+          requires:
+            - image_km_83
+      - in:
+          requires:
+            - image_km_83
+      - dan-smoke:
+          requires:
+            - in
+      - inactiveYes:
+          requires:
+            - in
+      - py310-vet:
+          requires:
+            - inactiveYes
+      - task-button-finish:
+          requires:
+            - inactiveYes
+      - node18-cov:
+          requires:
+            - task-button-finish
+      - eg:
+          requires:
+            - task-button-finish
+      - LAB_MERGE_9:
+          requires:
+            - eg
+      - reduce_edgePrevious:
+          requires:
+            - eg
+      - update-oauth-redirect:
+          requires:
+            - reduce_edgePrevious
+      - HOST_PASS:
+          requires:
+            - reduce_edgePrevious
+      - produce-full-docker-image:
+          requires:
+            - HOST_PASS
+      - hero--warning
+      - writer-084532-hard:
+          requires:
+            - hero--warning
+      - polaris-plus:
+          requires:
+            - writer-084532-hard
+      - dlgscene:
+          requires:
+            - writer-084532-hard
+      - f_TitleTraceProfile4:
+          requires:
+            - dlgscene
+      - node20-test:
+          requires:
+            - f_TitleTraceProfile4
